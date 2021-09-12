@@ -1,29 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
 
-import {DatePicker} from 'antd';
-import 'antd/dist/antd.css';
+import {Layout} from 'antd';
+
+import DetailPane from './DetailPane.js';
+import ListPane from './ListPane.js';
+import SearchBar from './SearchBar.js';
+
+import SplitPane from 'react-split-pane';
+
+
+const { Header, Sider, Content } = Layout;
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <DatePicker />
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Layout className="top-level">
+                <Header>
+                    <SearchBar/>
+                </Header>
+                <Layout>
+                    <SplitPane split="vertical" primary="second" minSize={350} style={{position: "fixed"}}>
+                            <ListPane entities={[
+                                { id: 1},
+                                { id: 2},
+                                { id: 3},
+                                ]}/>
+                            <DetailPane/>
+                    </SplitPane>
+                </Layout>
+            </Layout>
+        </div>
+    );
 }
 
 export default App;
